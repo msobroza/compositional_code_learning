@@ -25,8 +25,8 @@ wget http://nlp.stanford.edu/data/glove.42B.300d.zip
 unzip glove.42B.300d.zip
 # The follow line generates a dataset containing only words and vectors found in IMDB and in GloVe
 python gen_intersect_imdb_embeddings.py
-# Learn the compact representation (please consult help for more details)
-python gumbel_softmax_ae.py --path_output_codes --path_output_reconstruction --version 1
+# Learn the compact representation (please consult help for more options)
+python gumbel_softmax_ae.py --path_output_codes <path> --path_output_reconstruction <path> --version <version_name>
 # Test vectors using a LSTM Model for IMDB Sentiment Analysis Classification
 python lstm_sent.py
 ```
