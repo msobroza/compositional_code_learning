@@ -1,9 +1,6 @@
 # Compressing Word Embeddings via Deep Compositional Code Learning (ICLR 2018)
 PyTorch implementation and Keras for testing
 
-![Keras](https://www.safaribooksonline.com/library/view/deep-learning-with/9781786469786/assets/B05478_09_05.jpg)
-
-![PyTorch](https://raw.githubusercontent.com/pytorch/pytorch/master/docs/source/_static/img/pytorch-logo-dark.png)
 
 ![Architecture](https://github.com/msobroza/compositional_code_learning/blob/master/compositional_image.png)
 
