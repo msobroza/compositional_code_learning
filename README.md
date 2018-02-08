@@ -14,6 +14,10 @@ https://openreview.net/forum?id=BJRZzFlRb
 
 # Execution
 ```bash
+git clone <this_project>
+cd compositional_code_learning
+wget http://nlp.stanford.edu/data/glove.42B.300d.zip
+# Install all dependencies
 python 
 ```
 
