@@ -14,7 +14,8 @@ for w in word_index.keys():
 
 # Get GloVe mapping
 
-GLOVE_DIR = '/home/msobroza/these/Word2VecParser/gloveVectors/'
+GLOVE_DIR = './'
+DESTINATION_PATH= './'
 embedding_index= dict() 
 f = open(os.path.join(GLOVE_DIR, 'glove.42B.300d.txt'),'r')
 count = 0
@@ -29,7 +30,7 @@ for line in f:
 f.close()
 print('GloVe vectors loaded...')
 
-DESTINATION_PATH= '/home/max/these/vae_gumbel_word_embeddings'
+
 # Save file containing corpus intersection 
 f = open(os.path.join(DESTINATION_PATH,'glove.42B.300d.txt'), 'w')
 

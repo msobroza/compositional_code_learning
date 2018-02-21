@@ -78,10 +78,7 @@ class Encoder(nn.Module):
         self.latent_dim = latent_dim
         self.matrix_sparsity = matrix_sparsity
         self.encoder_proj = nn.Linear(self.input_size, self.intermediate_dim)
-        if self.matrix_sparsity > 0.0:
-            self.alpha_proj = SparseConnect(self.intermediate_dim,  self.categorical_dim*self.latent_dim, self.sparsity, bias=False)
-        else:
-            self.alpha_proj = nn.Linear(self.intermediate_dim, self.categorical_dim*self.latent_dim)
+        self.alpha_proj = nn.Linear(self.intermediate_dim, self.categorical_dim*self.latent_dim)
 
     def forward(self, x, eps=1e-10):
         x = self.encoder_proj(x)
