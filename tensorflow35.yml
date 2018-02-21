@@ -1,0 +1,68 @@
+name: tensorflow35
+channels:
+- defaults
+dependencies:
+- ca-certificates=2017.08.26=h1d4fec5_0
+- cairo=1.12.18=6
+- certifi=2017.11.5=py35h9749603_0
+- expat=2.2.5=he0dffb1_0
+- fontconfig=2.11.1=6
+- freetype=2.5.5=2
+- glib=2.53.6=h5d9569c_2
+- graphviz=2.38.0=5
+- harfbuzz=0.9.39=1
+- icu=58.2=h9c2bf20_1
+- jpeg=9b=h024ee3a_2
+- libedit=3.1=heed3624_0
+- libffi=3.2.1=hd88cf55_4
+- libgcc-ng=7.2.0=h7cc24e2_2
+- libiconv=1.15=h63c8f33_5
+- libpng=1.6.32=hbd3595f_4
+- libstdcxx-ng=7.2.0=h7a57d05_2
+- libtiff=4.0.9=h28f6b97_0
+- libtool=2.4.6=h544aabb_3
+- libxml2=2.9.4=h2e8b1d7_6
+- ncurses=6.0=h9df7e31_2
+- openssl=1.0.2n=hb7f436b_0
+- pango=1.39.0=0
+- pcre=8.41=hc27e229_1
+- pip=9.0.1=py35h7e7da9d_4
+- pixman=0.32.6=0
+- pydot=1.2.3=py35hf778598_0
+- pyparsing=2.2.0=py35h041ed72_1
+- python=3.5.4=h417fded_24
+- readline=7.0=ha6073c6_4
+- setuptools=36.5.0=py35ha8c1747_0
+- sqlite=3.20.1=hb898158_2
+- tk=8.6.7=hc745277_3
+- wheel=0.30.0=py35hd3883cf_1
+- xz=5.2.3=h55aa19d_2
+- zlib=1.2.11=ha838bed_2
+- pip:
+  - bleach==1.5.0
+  - cycler==0.10.0
+  - enum34==1.1.6
+  - future==0.16.0
+  - h5py==2.7.1
+  - html5lib==0.9999999
+  - keras==2.1.2
+  - markdown==2.6.11
+  - matplotlib==2.1.1
+  - np-utils==0.5.4.0
+  - numpy==1.14.0
+  - opencv-python==3.4.0.12
+  - pandas==0.22.0
+  - protobuf==3.5.1
+  - python-dateutil==2.6.1
+  - pytz==2017.3
+  - pyyaml==3.12
+  - scikit-learn==0.19.1
+  - scipy==1.0.0
+  - seaborn==0.8.1
+  - six==1.11.0
+  - sklearn==0.0
+  - tensorflow-gpu==1.4.1
+  - tensorflow-tensorboard==0.4.0rc3
+  - werkzeug==0.14.1
+prefix: /home/max/anaconda3/envs/tensorflow35
+
