@@ -1,0 +1,10 @@
+#!/bin/bash
+python gumbel_softmax_ae.py --latend_dim 2 --categorical_dim 1024 --version "2_1024"
+python gumbel_softmax_ae.py --latent_dim 4 --categorical_dim 512 --version "4_512"
+python gumbel_softmax_ae.py --latent_dim 8 --categorical_dim 256 --version "8_256"
+python gumbel_softmax_ae.py --latent_dim 16 --categorical_dim 128 --version "16_128"
+python gumbel_softmax_ae.py --latent_dim 32 --categorical_dim 64 --version "32_64"
+python gumbel_softmax_ae.py --latent_dim 64 --categorical_dim 32 --version "64_32"
+python gumbel_softmax_ae.py --latent_dim 128 --categorical_dim 16 --version "128_16"
+python gumbel_softmax_ae.py --latent_dim 256 --categorical_dim 8 --version "256_8"
+python gumbel_softmax_ae.py --latent_dim 512 --categorical_dim 4 --version "512_4"

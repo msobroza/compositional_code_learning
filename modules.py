@@ -112,7 +112,6 @@ def gumbel_softmax(logits, tau=1, hard=False, eps=1e-10):
     (MIT license)
     """
     shape = logits.size()
-    assert len(shape) == 2
     y_soft = gumbel_softmax_sample(logits, tau=tau, eps=eps)
     if hard:
         _, k = y_soft.data.max(-1)

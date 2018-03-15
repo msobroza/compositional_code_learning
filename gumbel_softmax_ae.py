@@ -1,8 +1,8 @@
 import numpy as np
 from random import randint
-from modules import BatchTopK_attention
-from modules import SparseConnect
-from modules import KLDivLossGumbel
+#from modules import BatchTopK_attention
+#from modules import SparseConnect
+#from modules import KLDivLossGumbel
 import modules as M
 import argparse
 import torch
@@ -21,7 +21,7 @@ parser.add_argument('--batch_size', type=int, default=128, metavar='N',
                     help='batch size for training (default: 300)')
 parser.add_argument('--test_batch_size', type=int, default=1000, metavar='N',
                     help='batch size for testing (default: 1000)')
-parser.add_argument('--epochs', type=int, default=350, metavar='N',
+parser.add_argument('--epochs', type=int, default=150, metavar='N',
                     help='number of epochs to train (default: 10)')
 parser.add_argument('--lr', type=float, default=0.0001, metavar='LR',
                     help='learning rate (default: 0.0001)')
@@ -33,27 +33,27 @@ parser.add_argument('--log_interval', type=int, default=2000, metavar='N',
                     help='how many batches to wait before logging training status')
 parser.add_argument('--input_size', type=int, default=300, metavar='N',
                     help = 'number of dimensions of input size')
-parser.add_argument('--latent_dim', type=int, default=8, metavar='N',
+parser.add_argument('--latent_dim', type=int, default=2, metavar='N',
                     help = 'number of latent dimensions ')
-parser.add_argument('--categorical_dim', type=int, default=8, metavar='N',
+parser.add_argument('--categorical_dim', type=int, default=1024, metavar='N',
                     help= 'number of clusters')
-parser.add_argument('--intermediate_dim', type=int, default=32, metavar='N',
+parser.add_argument('--intermediate_dim', type=int, default=1024, metavar='N',
                     help= 'number of dimensions in intermediate layer')
 parser.add_argument('--matrix_sparsity', type=float, default=0.0, metavar='MS',
                     help='learning rate (default: 0.0)')
-parser.add_argument('--path_word_vectors', type=str, default='./imdb_glove.42B.300d.txt', metavar='E',
+parser.add_argument('--path_word_vectors', type=str, default='/media/storage/glove_vectors/glove.6B.300d.txt', metavar='E',
                     help='path word embeddings')
-parser.add_argument('--path_output_codes', type=str, default='./codes_bin_70K_64x8d_.txt', help='path output codes')
-parser.add_argument('--path_output_reconstruction', type=str, default='./dense_70K_64x8d_.txt', help='path ouput vector reconstruction')
-parser.add_argument('--version',type=str, default='_70K_64x8d_',help='version')
+parser.add_argument('--path_output_codes', type=str, default='/media/storage/word_vectors/codes_bin_40K_6B_', help='path output codes')
+parser.add_argument('--path_output_reconstruction', type=str, default='/media/storage/word_vectors/dense_40K_6B_', help='path ouput vector reconstruction')
+parser.add_argument('--version',type=str, default='version_std.txt',help='version')
 
 args = parser.parse_args()
 args.cuda = not args.no_cuda and torch.cuda.is_available()
 
-def save_checkpoint(state, is_best, filename='checkpoint'+args.version+'.pth.tar'):
+def save_checkpoint(state, is_best, filename='/media/storage/word_vectors/checkpoint'+args.version+'.pth.tar'):
     torch.save(state, filename)
     if is_best:
-        shutil.copyfile(filename, 'model_best'+args.version+'.pth.tar')
+        shutil.copyfile(filename, '/media/storage/word_vectors/model_best'+args.version+'.pth.tar')
 
 torch.manual_seed(args.seed)
 if args.cuda:
@@ -118,8 +118,8 @@ class AE_gumbel(nn.Module):
 
     def forward(self, x):
         logits, softmax_logits, log_softmax_logits = self.encoder(x)
-        encoder_output= M.gumbel_softmax(logits.view(-1, self.categorical_dim*self.latent_dim), hard=False)
-        print(encoder_output)
+        encoder_output= M.gumbel_softmax(logits.view(-1, self.categorical_dim,self.latent_dim), hard=False)
+        #print(encoder_output)
         x_decoded = self.decoder(encoder_output)
         return x_decoded, softmax_logits, log_softmax_logits, encoder_output
 
@@ -129,7 +129,7 @@ model = AE_gumbel(args.input_size, args.intermediate_dim, args.categorical_dim, 
 optimizer = optim.Adam(model.parameters(), lr=args.lr)
 
 lossMSE = nn.MSELoss()
-lossKL = KLDivLossGumbel(args.categorical_dim, args.latent_dim, size_average=False)
+#lossKL = KLDivLossGumbel(args.categorical_dim, args.latent_dim, size_average=False)
 
 if args.cuda:
     model.cuda()
@@ -148,8 +148,9 @@ def train(epoch):
         x = data
         optimizer.zero_grad()
         x_decoded, output_encoder, log_output_encoder, _ = model(data)
-        loss_KL = lossKL(output_encoder, log_output_encoder)
+        #loss_KL = lossKL(output_encoder, log_output_encoder)
         loss_MSE = args.input_size*lossMSE(x_decoded, x)
+        loss_KL = loss_MSE
         # elbo loss
         loss = loss_MSE #- loss_KL
         loss.backward()
@@ -170,7 +171,7 @@ for epoch in tqdm(range(1, args.epochs + 1)):
     train(epoch)
 
 # Load best model
-checkpoint = torch.load('model_best'+args.version+'.pth.tar')
+checkpoint = torch.load('/media/storage/word_vectors/model_best'+args.version+'.pth.tar')
 model.load_state_dict(checkpoint['state_dict'])
 model.eval()
 word_codes=dict()
@@ -196,8 +197,8 @@ def vector_for(w):
     w_i=vocab[w]
     return word_codes[w_i], word_dense[w_i]
 
-codes_file_name = args.path_output_codes
-dense_file_name = args.path_output_reconstruction
+codes_file_name = args.path_output_codes+args.version
+dense_file_name = args.path_output_reconstruction+args.version
 # Save codes in a file
 i=0
 f=open(codes_file_name, 'w')
