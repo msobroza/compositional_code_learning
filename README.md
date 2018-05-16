@@ -33,8 +33,6 @@ python gumbel_softmax_ae.py --path_output_codes <path> --path_output_reconstruct
 # Test vectors using a LSTM Model for IMDB Sentiment Analysis Classification
 python lstm_sent.py
 ```
-
-If you liked please put a star little star for me :-)
 Any concerns or suggestions please contact me
 
 Credits for the implementation: Max Raphael Sobroza Marques
