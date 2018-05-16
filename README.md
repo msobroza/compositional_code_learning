@@ -4,7 +4,7 @@ PyTorch implementation and Keras for testing
 
 ![Architecture](https://github.com/msobroza/compositional_code_learning/blob/master/compositional_image.png)
 
-I got the comparable results than the paper for sentiment analysis in the best configuration. I did not test it for Machine Translation.
+I got comparable results for sentiment analysis in the best configuration. I did not test it for Machine Translation.
 
 https://openreview.net/forum?id=BJRZzFlRb
 
